@@ -8,7 +8,7 @@ import com.reis.core.service.funcoesBiblioeteca;
 
 import java.util.Arrays;
 
-public abstract class Biblioteca implements funcoesBiblioeteca {
+public class Biblioteca implements funcoesBiblioeteca {
     Livro[]livros = new Livro[10];
     private int quantidadeDeLivros =0;
 

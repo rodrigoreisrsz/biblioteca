@@ -3,9 +3,7 @@ package com.reis.core.DAO;
 import com.reis.core.connection.DatabaseConnection;
 import com.reis.core.domain.Livro;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LivroDAO {
     public void salvar(Livro livro) throws SQLException {
@@ -38,6 +36,27 @@ public class LivroDAO {
                 e.printStackTrace();
             }
 
+        }
+    }
+    public void exibirTodos(){
+        Connection conn = null;
+        ResultSet rs = null;
+        Statement st = null;
+        try{
+            conn = DatabaseConnection.obterConexao();
+            st = conn.createStatement();
+            rs = st.executeQuery("select * from livros");
+            while (rs.next()) {
+                String nome = rs.getString("titulo");
+                System.out.println(" titulo: " + nome);
+            }
+        }catch(SQLException e){
+            e.getMessage();
+        }finally {
+
+           DatabaseConnection.closeResultSet(rs);
+           DatabaseConnection.closeStatements(st);
+           DatabaseConnection.closeConnection(conn);
         }
     }
 }
